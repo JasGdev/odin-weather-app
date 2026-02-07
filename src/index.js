@@ -3,37 +3,63 @@ import "./styles.css";
 
 console.log("Working");
 
-
 const key = "B7866RFQXY9AH8LCVSL22JW3T";
 const accessURL =
-  "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/london?key=" +
-  key;
+  "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/london?key=B7866RFQXY9AH8LCVSL22JW3T";
 
-
-
-
-async function getWeatherData(accessURL) {
-  const response = await fetch(accessURL);
-  const responseData = await response.json()
-  console.log(responseData)
-  return responseData
+async function getWeatherData(url) {
+  const response = await fetch(url);
+  const responseData = await response.json();
+  return responseData;
 }
 
-function getUsableData(data){
+async function getUsableData(url) {
+  // return data.currentConditions
+  const data = await getWeatherData(url);
+
   const info = {
-    conditions: data.currentCondition.conditions,
-    currentTime: data.currentCondition.datetime,
-    feelsLike: data.currentConditions.feeslike,
-    humidity: data.currentConditions.humidity,
+    location: data.address,
+    conditions: data.currentConditions.conditions,
+    currentTime: data.currentConditions.datetime,
+    feelsLike: data.currentConditions.feelslike,
     temp: data.currentConditions.temp,
-    windspeed: data.currentConditions.windspeed,
-    weekConditions: data.descriptions,
-  } 
-
-  return info
+    weekConditions: data.description,
+  };
+  return info;
 }
 
+const searchForm = document.querySelector("form");
+const searchInput = document.querySelector("input");
+const msgDisplay = document.querySelector(".msg");
 
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const city = searchInput.value;
+  const accessURL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city.toLowerCase()}?key=B7866RFQXY9AH8LCVSL22JW3T`;
 
+  getUsableData(accessURL).then((data) => {
+    console.log(data)
+    // displayWeather(data.conditions)
+    const location =
+      data.location.charAt(0).toUpperCase() + data.location.slice(1);
+    const conditions = data.conditions.toLowerCase();
+    const currentTime = data.currentTime;
+    const weekConditions = data.weekConditions.toLowerCase();
+    const measurement = "Celsius";
+    const temp = data.temp + " " + measurement;
+    const feelsLike = data.feelsLike + " " + measurement;
 
-getWeatherData(accessURL);
+    msgDisplay.textContent = `${location} at ${currentTime} is currently ${conditions}, it is currently ${temp} but it feels like ${feelsLike}. The week forecast is ${weekConditions}`;
+    console.log(data);
+  });
+});
+
+const img = document.querySelector("img");
+
+async function displayWeather(conditions) {
+  const response = await fetch(
+    `https://api.giphy.com/v1/gifs/translate?api_key=twFGArayW07V8dN1iso8otCHe1H4GhKa&s=weather${conditions}`,
+  );
+  const weatherData = await response.json();
+  img.src = weatherData.data.images.original.url;
+}
