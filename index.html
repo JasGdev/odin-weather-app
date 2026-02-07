@@ -1,11 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-<script defer src="main.js"></script></head>
-<body>
-    
-</body>
+  <script defer src="main.js"></script></head>
+  <body>
+    <div class="container" id="">
+      <img alt="" />
+      <div class="msg"></div>
+      <form action="">
+        <div class="measurement">
+          <input
+            type="radio"
+            id="Fahrenheit"
+            name="measurement"
+            value="Fahrenheit"
+            checked
+          />
+          <label for="Fahrenheit">Fahrenheit</label><br />
+          <input type="radio" id="Celsius" name="measurement" value="Celsius" />
+          <label for="Celsius"> Celsius</label><br />
+        </div>
+
+
+        <input class="search" type="text" placeholder="Choose a city" />
+        <button type="submit">Find weather</button>
+      </form>
+    </div>
+  </body>
 </html>
