@@ -6,14 +6,27 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="container">
-      <img alt="">
+    <div class="container" id="">
+      <img alt="" />
       <div class="msg"></div>
       <form action="">
-        <input type="text" placeholder="Choose a city">
+        <div class="measurement">
+          <input
+            type="radio"
+            id="Fahrenheit"
+            name="measurement"
+            value="Fahrenheit"
+            checked
+          />
+          <label for="Fahrenheit">Fahrenheit</label><br />
+          <input type="radio" id="Celsius" name="measurement" value="Celsius" />
+          <label for="Celsius"> Celsius</label><br />
+        </div>
+
+
+        <input class="search" type="text" placeholder="Choose a city" />
         <button type="submit">Find weather</button>
       </form>
-        
     </div>
   </body>
 </html>

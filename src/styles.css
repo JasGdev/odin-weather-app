@@ -18,6 +18,26 @@ body {
   gap: 30px;
 }
 
+.container.day{
+  background-color: rgb(174, 255, 255);
+  color: black;
+}
+
+.container.night{
+  background-color: rgb(0, 0, 0);
+}
+
+label.day{
+  color: black;
+}
+
+label.night{
+  color: white;
+}
+
+
+
+
 form {
   display: flex;
   flex-direction: column;
@@ -33,18 +53,25 @@ input {
 
 input:hover {
   background-color: rgb(216, 222, 227);
-  
+
 }
 
 img{
   /* height: 40%; */
   /* width: 40%; */
-  padding-bottom: 100px;
 }
 
-.msg{
+.msg.visible{
   background-color: white;
-  width: 500px;
+  max-width: 500px;
   padding: 10px;
   font-size: large;
+}
+
+/* Radio */
+
+.measurement{
+  display: flex;
+  justify-content: space-between;
+  color: white;
 }
